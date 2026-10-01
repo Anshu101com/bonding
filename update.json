@@ -1,0 +1,19 @@
+{
+    "latestVersion": "1.0.1",
+    "latestBuild": 1,
+
+    "minimumVersion": "1.0.0",
+    "minimumBuild": 1,
+
+    "critical": false,
+
+    "releaseDate": "2026-10-01",
+
+    "apkName": "Bonding.v1.0.0.apk",
+
+    "downloadUrl": "",
+
+    "releaseTitle": "Initial Release",
+
+    "releaseNotes": "Welcome to Bonding. This is the first release."
+}
