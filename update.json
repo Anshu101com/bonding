@@ -1,12 +1,12 @@
 {
-  "latestVersion": "1.0.2",
+  "latestVersion": "1.0.3",
   "latestBuild": 1,
   "minimumVersion": "1.0.0",
   "minimumBuild": 1,
   "critical": false,
-  "releaseDate": "2026-10-05",
-  "apkName": "Bonding.Family.v1.0.2.Anshu101com.apk",
-  "apkUrl": "https://github.com/Anshu101com/bonding/releases/download/beta_test/Bonding.Family.v1.0.2.Anshu101com.apk",
+  "releaseDate": "2026-10-07",
+  "apkName": "Bonding.Family.v1.0.3.Anshu101com.apk",
+  "apkUrl": "https://github.com/Anshu101com/bonding/releases/download/beta_test/Bonding.Family.v1.0.3.Anshu101com.apk",
   "releaseTitle": "Initial Release",
   "releaseNotes": [
     "Welcome to Bonding.",
