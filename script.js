@@ -4,422 +4,271 @@ const GITHUB_REPOSITORY = "bonding";
 const GITHUB_RELEASES_API =
     `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/releases`;
 
-const TARGET_TAG = "beta_test";
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    const yearElement =
-        document.getElementById("year");
+    const yearElement = document.getElementById("year");
 
     if (yearElement) {
-        yearElement.textContent =
-            new Date().getFullYear();
+        yearElement.textContent = new Date().getFullYear();
     }
 
     loadLatestRelease();
-
 });
 
-
 async function loadLatestRelease() {
-
-    const versionElement =
-        document.getElementById("hero-version");
-
-    const releaseVersion =
-        document.getElementById("release-version");
-
-    const releaseTitle =
-        document.getElementById("release-title");
-
-    const releaseDate =
-        document.getElementById("release-date");
-
-    const downloadButton =
-        document.getElementById("download-button");
-
-    const releaseNotes =
-        document.getElementById("release-notes");
-
+    const versionElement = document.getElementById("hero-version");
+    const releaseVersion = document.getElementById("release-version");
+    const releaseTitle = document.getElementById("release-title");
+    const releaseDate = document.getElementById("release-date");
+    const downloadButton = document.getElementById("download-button");
+    const releaseNotes = document.getElementById("release-notes");
 
     try {
+        if (releaseVersion) {
+            releaseVersion.textContent = "Checking for updates...";
+        }
+
+        if (downloadButton) {
+            downloadButton.textContent = "Loading release...";
+            downloadButton.classList.add("disabled");
+            downloadButton.setAttribute("aria-disabled", "true");
+            downloadButton.removeAttribute("href");
+        }
 
         const response = await fetch(
             GITHUB_RELEASES_API,
             {
                 headers: {
-                    "Accept":
-                        "application/vnd.github+json"
+                    Accept: "application/vnd.github+json"
                 },
-
                 cache: "no-store"
             }
         );
 
-
         if (!response.ok) {
-            throw new Error(
-                `GitHub returned ${response.status}`
-            );
+            throw new Error(`GitHub returned ${response.status}`);
         }
 
-
-        const releases =
-            await response.json();
-
+        const releases = await response.json();
 
         if (!Array.isArray(releases)) {
-            throw new Error(
-                "GitHub returned an invalid release list."
-            );
+            throw new Error("Invalid GitHub release response.");
         }
 
-
-        /*
-         * Find the specific beta release.
-         *
-         * This allows the website to display
-         * a GitHub PRE-RELEASE instead of relying
-         * on /releases/latest.
-         */
-        const release =
-            releases.find(
-                item =>
-                    item.tag_name === TARGET_TAG &&
-                    item.draft === false
-            );
-
+        // GitHub normally returns releases newest first.
+        // Select the newest published release that contains an APK.
+        const release = releases
+            .filter(item =>
+                item.draft === false &&
+                item.published_at &&
+                Array.isArray(item.assets) &&
+                item.assets.some(asset =>
+                    asset.name?.toLowerCase().endsWith(".apk")
+                )
+            )
+            .sort((a, b) =>
+                new Date(b.published_at) - new Date(a.published_at)
+            )[0];
 
         if (!release) {
-            throw new Error(
-                `Release "${TARGET_TAG}" was not found.`
-            );
+            throw new Error("No published release with an APK was found.");
         }
 
+        const apk = findApkAsset(release.assets);
 
-        /*
-         * Make sure this is actually a
-         * pre-release.
-         */
-        if (!release.prerelease) {
-            console.warn(
-                `Release "${TARGET_TAG}" is not marked as a pre-release.`
-            );
+        if (!apk) {
+            throw new Error("The APK asset could not be found.");
         }
-
 
         const version =
-            extractVersionFromApk(
-                release.assets
-            ) ||
-            extractVersionFromRelease(
-                release.name
-            ) ||
-            "1.0.2";
+            extractVersionFromApk(apk.name) ||
+            extractVersionFromRelease(release.name) ||
+            extractVersionFromRelease(release.tag_name) ||
+            "Unknown";
 
+        const title = release.name || release.tag_name || "Bonding Release";
+        const publishedDate = formatDate(release.published_at);
 
-        const title =
-            release.name ||
-            "Beta Testing";
-
-
-        const publishedDate =
-            formatDate(
-                release.published_at
-            );
-
-
-        const apk =
-            findApkAsset(
-                release.assets
-            );
-
-
-        /*
-         * Hero version
-         */
+        // Update hero version.
         if (versionElement) {
             versionElement.textContent =
-                version;
+                version === "Unknown" ? version : `v${version}`;
         }
 
-
-        /*
-         * Release version
-         */
+        // Update release version.
         if (releaseVersion) {
-
             releaseVersion.textContent =
-                `Bonding ${version}`;
-
+                version === "Unknown"
+                    ? "Latest Bonding release"
+                    : `Bonding v${version}`;
         }
 
-
-        /*
-         * Release title
-         */
+        // Update release title.
         if (releaseTitle) {
-
-            releaseTitle.textContent =
-                title;
-
+            releaseTitle.textContent = title;
         }
 
-
-        /*
-         * Release date
-         */
+        // Update release date.
         if (releaseDate) {
-
-            releaseDate.textContent =
-                publishedDate;
-
+            releaseDate.textContent = publishedDate;
         }
 
-
-        /*
-         * Release notes
-         */
+        // Render release notes safely.
         if (releaseNotes) {
-
-            const notes =
-                release.body ||
+            const notes = release.body?.trim() ||
                 "No release notes available.";
 
             releaseNotes.innerHTML = `
                 <strong>What's new</strong>
                 <br>
-                ${escapeHtml(notes)
-                    .replace(/\n/g, "<br>")}
+                ${escapeHtml(notes).replace(/\r?\n/g, "<br>")}
             `;
-
         }
 
-
-        /*
-         * APK download
-         */
-        if (apk) {
-
-            downloadButton.href =
-                apk.browser_download_url;
-
-            downloadButton.textContent =
-                "Download APK";
-
-            downloadButton.classList.remove(
-                "disabled"
-            );
-
-            downloadButton.removeAttribute(
-                "aria-disabled"
-            );
-
-            downloadButton.setAttribute(
-                "download",
-                apk.name
-            );
-
-        } else {
-
-            downloadButton.textContent =
-                "APK unavailable";
-
-            downloadButton.classList.add(
-                "disabled"
-            );
-
+        // Set direct APK download.
+        if (downloadButton) {
+            downloadButton.href = apk.browser_download_url;
+            downloadButton.textContent = "Download APK";
+            downloadButton.classList.remove("disabled");
+            downloadButton.removeAttribute("aria-disabled");
+            downloadButton.setAttribute("download", apk.name);
         }
 
+        console.log("Latest Bonding release loaded:", {
+            title,
+            version,
+            tag: release.tag_name,
+            apk: apk.name,
+            date: publishedDate
+        });
 
     } catch (error) {
-
-        console.error(
-            "Unable to load Bonding release:",
-            error
-        );
-
+        console.error("Unable to load Bonding release:", error);
 
         if (versionElement) {
-
-            versionElement.textContent =
-                "Unavailable";
-
+            versionElement.textContent = "Unavailable";
         }
-
 
         if (releaseVersion) {
-
-            releaseVersion.textContent =
-                "Beta release unavailable";
-
+            releaseVersion.textContent = "Release unavailable";
         }
-
 
         if (releaseTitle) {
-
-            releaseTitle.textContent =
-                "Please try again later.";
-
+            releaseTitle.textContent = "Please try again later.";
         }
-
 
         if (releaseDate) {
-
-            releaseDate.textContent =
-                "—";
-
+            releaseDate.textContent = "—";
         }
 
+        if (releaseNotes) {
+            releaseNotes.textContent =
+                "Unable to load release information. Please try again later.";
+        }
 
         if (downloadButton) {
-
-            downloadButton.textContent =
-                "Unavailable";
-
-            downloadButton.classList.add(
-                "disabled"
-            );
-
+            downloadButton.textContent = "Download unavailable";
+            downloadButton.classList.add("disabled");
+            downloadButton.setAttribute("aria-disabled", "true");
+            downloadButton.removeAttribute("href");
         }
-
     }
-
 }
 
-
-/*
- * Find APK asset.
- */
 function findApkAsset(assets) {
-
     if (!Array.isArray(assets)) {
         return null;
     }
 
+    const apkAssets = assets
+        .filter(asset =>
+            typeof asset.name === "string" &&
+            asset.name.toLowerCase().endsWith(".apk") &&
+            typeof asset.browser_download_url === "string"
+        )
+        .map(asset => ({
+            ...asset,
+            version: extractVersionFromApk(asset.name)
+        }))
+        .filter(asset => asset.version !== null);
 
-    return assets.find(
-        asset => {
+    if (apkAssets.length === 0) {
+        return null;
+    }
 
-            const name =
-                String(asset.name || "")
-                    .toLowerCase();
+    // Sort by version number, highest first.
+    apkAssets.sort((a, b) =>
+        compareVersions(b.version, a.version)
+    );
 
-            return name.endsWith(".apk");
+    return apkAssets[0];
+}
 
+function compareVersions(a, b) {
+    const versionA = a.split(/[.-]/).map(Number);
+    const versionB = b.split(/[.-]/).map(Number);
+
+    const length = Math.max(versionA.length, versionB.length);
+
+    for (let i = 0; i < length; i++) {
+        const partA = versionA[i] || 0;
+        const partB = versionB[i] || 0;
+
+        if (partA !== partB) {
+            return partA - partB;
         }
-    ) || null;
+    }
 
+    return 0;
 }
 
-
-/*
- * Extract version from APK name.
- *
- * Example:
- *
- * Bonding.Family.v1.0.2.Anshu101com.apk
- *
- * returns:
- *
- * 1.0.2
- */
-function extractVersionFromApk(assets) {
-
-    const apk =
-        findApkAsset(assets);
-
-    if (!apk || !apk.name) {
+function extractVersionFromApk(filename) {
+    if (!filename) {
         return null;
     }
 
+    const match = String(filename).match(
+        /v?(\d+\.\d+\.\d+(?:[.-]\d+)*)/i
+    );
 
-    const match =
-        apk.name.match(
-            /v(\d+\.\d+\.\d+)/i
-        );
-
-
-    if (!match) {
-        return null;
-    }
-
-
-    return match[1];
-
+    return match ? match[1] : null;
 }
 
-
-/*
- * Fallback version extraction
- * from the release title.
- */
 function extractVersionFromRelease(title) {
-
     if (!title) {
         return null;
     }
 
+    const match = String(title).match(
+        /v?(\d+\.\d+\.\d+(?:[.-]\d+)*)/i
+    );
 
-    const match =
-        String(title).match(
-            /v?(\d+\.\d+\.\d+)/i
-        );
-
-
-    if (!match) {
-        return null;
-    }
-
-
-    return match[1];
-
+    return match ? match[1] : null;
 }
 
-
-/*
- * Format GitHub release date.
- */
 function formatDate(dateString) {
-
     if (!dateString) {
         return "Unknown release date";
     }
 
-
-    const date =
-        new Date(dateString);
-
+    const date = new Date(dateString);
 
     if (Number.isNaN(date.getTime())) {
         return "Unknown release date";
     }
 
-
-    return date.toLocaleDateString(
-        undefined,
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
-
+    return date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
 }
 
-
-/*
- * Escape release notes before
- * inserting them into HTML.
- */
 function escapeHtml(value) {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
+
