@@ -1,607 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8468c2">
+  <meta name="description" content="Bonding Family helps families stay connected through meaningful tasks, appreciation, rewards, and shared moments.">
   <title>Bonding Family — Stronger Families, Closer Every Day</title>
-
-  <meta
-    name="description"
-    content="Bonding Family is a family connection app built to help families stay connected through tasks, appreciation, activities, rewards, and family memories."
-  />
-
-  <meta
-    name="theme-color"
-    content="#8468C2"
-  />
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-  <!-- =========================
-       NAVIGATION
-  ========================== -->
-
   <header class="navbar">
     <div class="container nav-container">
-
-      <a href="#" class="brand">
-        <span class="brand-icon">♥</span>
+      <a href="#home" class="brand" aria-label="Bonding home">
+        <span class="brand-icon" aria-hidden="true">♥</span>
         <span>Bonding</span>
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main navigation">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#about">About Us</a>
         <a href="#download">Download</a>
       </nav>
 
-      <a href="#download" class="nav-button">
-        Get Bonding
-      </a>
-
+      <a href="#download" class="nav-button">Get Bonding <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
-
-  <!-- =========================
-       HERO
-  ========================== -->
-
   <main>
-
-    <section class="hero">
-
+    <section class="hero" id="home">
       <div class="container hero-container">
-
         <div class="hero-content">
-
           <div class="hero-badge">
-            <span class="status-dot"></span>
-            <span>Bonding Family · Beta Testing</span>
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Bonding Family · <span id="hero-version">Latest release</span></span>
           </div>
 
-          <h1>
-            Stronger Families.
-            <span>Closer Every Day.</span>
-          </h1>
-
+          <h1>Stronger Families.<span>Closer Every Day.</span></h1>
           <p class="hero-description">
-            Bonding Family helps families stay connected through
-            meaningful tasks, appreciation, activities, rewards,
-            and shared moments.
+            Bonding Family helps families stay connected through meaningful tasks,
+            appreciation, activities, rewards, and shared moments.
           </p>
 
           <div class="hero-actions">
-
-            <a href="#download" class="primary-button">
-              Download Bonding
-              <span>↓</span>
-            </a>
-
-            <a href="#features" class="secondary-button">
-              Explore Features
-            </a>
-
+            <a href="#download" class="primary-button">Get Bonding <span aria-hidden="true">↓</span></a>
+            <a href="#features" class="secondary-button">Explore Features</a>
           </div>
 
-          <div class="hero-meta">
-
-            <span>
-              <span class="check">✓</span>
-              Android
-            </span>
-
-            <span>
-              <span class="check">✓</span>
-              Free to use
-            </span>
-
-            <span>
-              <span class="check">✓</span>
-              Family focused
-            </span>
-
+          <div class="hero-meta" aria-label="App highlights">
+            <span><span class="check" aria-hidden="true">✓</span> Android</span>
+            <span><span class="check" aria-hidden="true">✓</span> Family focused</span>
+            <span><span class="check" aria-hidden="true">✓</span> Built for togetherness</span>
           </div>
-
         </div>
 
-
-        <!-- Phone Preview -->
-
-        <div class="hero-preview">
-
+        <div class="hero-preview" aria-label="Illustration of the Bonding app">
+          <div class="floating-note note-one"><span>♥</span> Small acts matter</div>
           <div class="phone">
-
             <div class="phone-notch"></div>
-
             <div class="phone-screen">
-
               <div class="preview-top">
-
-                <div>
-                  <small>Welcome back</small>
-                  <strong>My Family ♥</strong>
-                </div>
-
-                <div class="preview-avatar">
-                  A
-                </div>
-
+                <div><small>Welcome back</small><strong>My Family ♥</strong></div>
+                <div class="preview-avatar">A</div>
               </div>
-
 
               <div class="preview-card preview-family">
-
                 <small>YOUR FAMILY</small>
-
-                <h3>
-                  Together is better
-                </h3>
-
-                <div class="family-avatars">
-
-                  <span>A</span>
-                  <span>R</span>
-                  <span>S</span>
-                  <span>+</span>
-
-                </div>
-
+                <h3>Together is better</h3>
+                <div class="family-avatars"><span>A</span><span>R</span><span>S</span><span>+</span></div>
               </div>
 
-
-              <div class="preview-section-title">
-                Today's Tasks
-              </div>
-
+              <div class="preview-section-title">Today's Tasks</div>
               <div class="preview-task">
-
-                <div class="task-icon">
-                  ✓
-                </div>
-
-                <div>
-                  <strong>Help at home</strong>
-                  <small>Complete a family task</small>
-                </div>
-
+                <div class="task-icon">✓</div>
+                <div><strong>Help at home</strong><small>Complete a family task</small></div>
               </div>
-
-
               <div class="preview-task">
-
-                <div class="task-icon">
-                  ♥
-                </div>
-
-                <div>
-                  <strong>Appreciate someone</strong>
-                  <small>Make a family member smile</small>
-                </div>
-
+                <div class="task-icon">♥</div>
+                <div><strong>Show appreciation</strong><small>Make someone smile</small></div>
               </div>
-
-
               <div class="preview-points">
-
-                <div>
-                  <small>Family Points</small>
-                  <strong>1,240</strong>
-                </div>
-
-                <div class="points-icon">
-                  ★
-                </div>
-
+                <div><small>Family Points</small><strong>1,240</strong></div>
+                <div class="points-icon">★</div>
               </div>
-
             </div>
-
           </div>
-
+          <div class="floating-note note-two"><span>✦</span> Celebrate every effort</div>
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- =========================
-         FEATURES
-    ========================== -->
 
     <section class="section" id="features">
-
       <div class="container">
-
         <div class="section-heading">
-
-          <div class="section-badge">
-            FEATURES
-          </div>
-
-          <h2>
-            Everything your family needs
-            <span>to stay connected.</span>
-          </h2>
-
-          <p>
-            Bonding turns everyday family interactions into
-            meaningful moments of connection.
-          </p>
-
+          <div class="section-badge">FEATURES</div>
+          <h2>Everyday moments.<span>Stronger connections.</span></h2>
+          <p>Bonding brings family activities and shared responsibilities into one welcoming space.</p>
         </div>
-
 
         <div class="features-grid">
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              ♥
-            </div>
-
-            <h3>
-              Family
-            </h3>
-
-            <p>
-              Build your family profile and keep everyone
-              connected in one place.
-            </p>
-
+            <div class="feature-icon">♥</div>
+            <h3>Family Space</h3>
+            <p>Bring family members together and keep important family connections in one place.</p>
           </article>
-
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              ✓
-            </div>
-
-            <h3>
-              Family Tasks
-            </h3>
-
-            <p>
-              Assign and complete meaningful tasks that help
-              family members support each other.
-            </p>
-
+            <div class="feature-icon">✓</div>
+            <h3>Family Tasks</h3>
+            <p>Assign and complete meaningful tasks that help family members support each other.</p>
           </article>
-
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              ★
-            </div>
-
-            <h3>
-              Rewards
-            </h3>
-
-            <p>
-              Earn points and celebrate contributions made
-              by family members.
-            </p>
-
+            <div class="feature-icon">★</div>
+            <h3>Points & Rewards</h3>
+            <p>Celebrate contributions and motivate each other with a shared points system.</p>
           </article>
-
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              🌳
-            </div>
-
-            <h3>
-              Family Tree
-            </h3>
-
-            <p>
-              See your family connections and relationships
-              together in one place.
-            </p>
-
+            <div class="feature-icon">🌳</div>
+            <h3>Family Tree</h3>
+            <p>Explore family relationships and understand how everyone is connected.</p>
           </article>
-
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              ↔
-            </div>
-
-            <h3>
-              Stay Synced
-            </h3>
-
-            <p>
-              Keep family information and activities
-              synchronized across devices.
-            </p>
-
+            <div class="feature-icon">↔</div>
+            <h3>Stay Synced</h3>
+            <p>Keep family information and activities synchronized across connected devices.</p>
           </article>
-
-
           <article class="feature-card">
-
-            <div class="feature-icon">
-              ◷
-            </div>
-
-            <h3>
-              Activity History
-            </h3>
-
-            <p>
-              Look back at completed tasks, appreciation,
-              rewards, and family activities.
-            </p>
-
+            <div class="feature-icon">◷</div>
+            <h3>Activity History</h3>
+            <p>Review completed tasks and see the contributions made by family members.</p>
           </article>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- =========================
-         HOW IT WORKS
-    ========================== -->
 
     <section class="section how-section" id="how-it-works">
-
       <div class="container">
-
         <div class="section-heading">
-
-          <div class="section-badge">
-            HOW IT WORKS
-          </div>
-
-          <h2>
-            Simple to start.
-            <span>Meaningful to use.</span>
-          </h2>
-
-          <p>
-            Bring your family together in just a few simple steps.
-          </p>
-
+          <div class="section-badge">HOW IT WORKS</div>
+          <h2>Simple to start.<span>Meaningful to use.</span></h2>
+          <p>Start building a more connected family routine in a few simple steps.</p>
         </div>
-
 
         <div class="steps-grid">
-
           <article class="step-card">
-
-            <div class="step-number">
-              01
-            </div>
-
-            <h3>
-              Create your profile
-            </h3>
-
-            <p>
-              Set up your personal profile and introduce
-              yourself to your family.
-            </p>
-
+            <div class="step-number">01</div>
+            <h3>Create your profile</h3>
+            <p>Set up your personal profile so your family can recognize and connect with you.</p>
           </article>
-
-
           <article class="step-card">
-
-            <div class="step-number">
-              02
-            </div>
-
-            <h3>
-              Connect your family
-            </h3>
-
-            <p>
-              Create or join your family using an invitation
-              or family code.
-            </p>
-
+            <div class="step-number">02</div>
+            <h3>Connect your family</h3>
+            <p>Create a family space or join one with an invitation or family code.</p>
           </article>
-
-
           <article class="step-card">
-
-            <div class="step-number">
-              03
-            </div>
-
-            <h3>
-              Help each other
-            </h3>
-
-            <p>
-              Share tasks, appreciate one another, earn
-              rewards, and build stronger connections.
-            </p>
-
+            <div class="step-number">03</div>
+            <h3>Support each other</h3>
+            <p>Share tasks, appreciate contributions, earn points, and celebrate progress together.</p>
           </article>
-
         </div>
-
       </div>
-
     </section>
 
+    <section class="section about-section" id="about">
+      <div class="container about-layout">
+        <div class="about-copy">
+          <div class="section-badge">ABOUT BONDING</div>
+          <h2>Family is more than living together.<span>It's growing together.</span></h2>
+          <p>
+            Bonding is a family connection app designed to make everyday cooperation
+            feel more meaningful. It gives family members a shared space to organize
+            tasks, recognize each other's efforts, and keep track of the little things
+            that help a household work as a team.
+          </p>
+          <p>
+            Our idea is simple: stronger relationships can grow from small, consistent
+            acts of care. Bonding aims to make those acts easier to share, notice, and celebrate.
+          </p>
+          <a href="#download" class="primary-button">Meet Bonding <span aria-hidden="true">→</span></a>
+        </div>
 
-    <!-- =========================
-         DOWNLOAD
-    ========================== -->
+        <div class="about-values">
+          <article class="value-card">
+            <div class="value-icon">🤝</div>
+            <div><h3>Built around teamwork</h3><p>Make shared responsibilities easier to understand and manage.</p></div>
+          </article>
+          <article class="value-card">
+            <div class="value-icon">💜</div>
+            <div><h3>Appreciate the little things</h3><p>Give everyday effort the recognition it deserves.</p></div>
+          </article>
+          <article class="value-card">
+            <div class="value-icon">🌱</div>
+            <div><h3>Grow closer over time</h3><p>Build positive habits through small moments of cooperation.</p></div>
+          </article>
+          <div class="about-quote">
+            “Together matters.”
+            <span>The thought behind Bonding</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="download-section" id="download">
-
       <div class="container">
-
         <div class="download-card">
-
           <div class="download-content">
-
-            <div class="section-badge download-badge">
-              BETA RELEASE
-            </div>
-
-            <h2>
-              Bring Bonding to
-              <span>your family.</span>
-            </h2>
-
-            <p>
-              Download the latest Android beta version of
-              Bonding Family and start building stronger
-              connections with your family.
-            </p>
-
-
-            <!-- Dynamic Release Information -->
+            <div class="section-badge download-badge">LATEST RELEASE</div>
+            <h2>Bring Bonding to<span>your family.</span></h2>
+            <p>Get the latest Android release and start building stronger connections with your family.</p>
 
             <div class="release-card">
-
               <div class="release-header">
-
                 <div>
-
-                  <div class="release-label">
-                    LATEST RELEASE
-                  </div>
-
-                  <h3 id="release-version">
-                    Loading...
-                  </h3>
-
+                  <div class="release-label">LATEST RELEASE</div>
+                  <h3 id="release-version">Loading...</h3>
                 </div>
-
-
-                <span class="release-status">
-                  BETA
-                </span>
-
+                <span class="release-status">ANDROID APK</span>
               </div>
-
-
-              <div class="release-title" id="release-title">
-                Checking latest release...
-              </div>
-
-
-              <div class="release-date" id="release-date">
-                —
-              </div>
-
-
-              <div class="release-notes" id="release-notes">
-                Checking release notes...
-              </div>
-
-
-              <a
-                id="download-button"
-                href="#"
-                class="download-button"
-              >
-                Loading...
-              </a>
-
+              <div class="release-title" id="release-title">Checking latest release...</div>
+              <div class="release-date" id="release-date">—</div>
+              <div class="release-notes" id="release-notes">Checking release notes...</div>
+              <a id="download-button" href="#" class="download-button" aria-disabled="true">Loading release...</a>
             </div>
-
-
-            <p class="download-note">
-              Android APK · Beta testing version
-            </p>
-
+            <p class="download-note">Android APK · Check release details before installing.</p>
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-
   </main>
 
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
   <footer class="footer">
-
     <div class="container footer-container">
-
       <div class="footer-brand">
-
-        <div class="brand">
-          <span class="brand-icon">♥</span>
-          <span>Bonding</span>
-        </div>
-
-        <p>
-          Stronger families. Closer every day.
-        </p>
-
+        <a href="#home" class="brand"><span class="brand-icon">♥</span><span>Bonding</span></a>
+        <p>Stronger families. Closer every day.</p>
       </div>
-
-
-      <div class="footer-links">
-
-        <a href="#features">
-          Features
-        </a>
-
-        <a href="#how-it-works">
-          How It Works
-        </a>
-
-        <a href="#download">
-          Download
-        </a>
-
-      </div>
-
-
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About Us</a>
+        <a href="#download">Download</a>
+        <a href="https://github.com/Anshu101com/bonding/releases" target="_blank" rel="noopener noreferrer">GitHub Releases ↗</a>
+      </nav>
       <div class="footer-bottom">
-
-        <span>
-          © 2026 Bonding Family
-        </span>
-
-        <span>
-          Beta Testing
-        </span>
-
+        <span>© <span id="year">2026</span> Bonding Family</span>
+        <span>Made for family togetherness</span>
       </div>
-
     </div>
-
   </footer>
 
-
-  <!-- =========================
-       SCRIPT
-  ========================== -->
-
   <script src="script.js"></script>
-
 </body>
 </html>
