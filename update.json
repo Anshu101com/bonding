@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.4",
+  "latestVersion": "1.0.5",
   "latestBuild": 1,
   "minimumVersion": "1.0.4",
   "minimumBuild": 1,
-  "critical": true,
+  "critical": false,
   "releaseDate": "2026-10-15",
   "apkName": "Bonding.Family.v1.0.4.Anshu101com.apk",
   "apkUrl": "https://github.com/Anshu101com/bonding/releases/download/beta_test/Bonding.Family.v1.0.4.Anshu101com.apk",
